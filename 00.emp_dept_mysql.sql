@@ -102,12 +102,22 @@ insert into emp values( 7844, 'TURNER', 'SALESMAN', 7698, STR_TO_DATE('8-9-1981'
 insert into emp values( 7876, 'ADAMS', 'CLERK', 7788, DATE_ADD(STR_TO_DATE('13-7-1987', '%d-%m-%Y'),INTERVAL -51 DAY), 1100, null, 20);
 insert into emp values( 7900, 'JAMES', 'CLERK', 7698, STR_TO_DATE('3-12-1981','%d-%m-%Y'), 950, null, 30);
 insert into emp values( 7934, 'MILLER', 'CLERK', 7782, STR_TO_DATE('23-1-1982','%d-%m-%Y'), 1300, null, 10);
+
+use playdata;
+
+DROP TABLE SALGRADE;
+CREATE TABLE SALGRADE( 
+	GRADE INT,
+	LOSAL INT,
+	HISAL INT 
+);
+INSERT INTO SALGRADE VALUES (1,700,1200);
+INSERT INTO SALGRADE VALUES (2,1201,1400);
+INSERT INTO SALGRADE VALUES (3,1401,2000);
+INSERT INTO SALGRADE VALUES (4,2001,3000);
+INSERT INTO SALGRADE VALUES (5,3001,9999);
    
 -- db에 작업한 내용을 영구 저장하는 필수 명령어
 -- insert / update / delete 명령에만 적용
 -- 참고 : commit 영구 저장은 tool별로 기본 속성으로 처리 하기도 하나 코드로 commit 작업 권장
 commit;
-
--- 데이터가 정상 저장이 되었는지 검색
--- emp라는 table로부터 모든 데이터 검색
-SELECT * FROM emp;
