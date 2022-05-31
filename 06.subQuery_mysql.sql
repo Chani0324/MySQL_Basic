@@ -26,11 +26,8 @@ select dname from dept where deptno = 20;
 
 -- sub query
 -- 실행 순서 : where 내의 select 문장 실행 후 main 쿼리 순으로 진행.
-select dname
-from dept
-where deptno = (
-	select deptno from emp where ename = 'SMITH'
-);
+SELECT dname FROM dept  
+WHERE deptno = (SELECT deptno FROM emp WHERE ename = 'SMITH');
 
 
 -- 2. SMITH와 동일한 직급(job)을 가진 사원들의 모든 정보 검색(SMITH 포함)
@@ -63,20 +60,17 @@ where sal >= (
 
 
 -- 4. DALLAS에 근무하는 사원의 이름, 부서 번호 검색 후 이름으로 오름차순 정렬
-select ename, deptno
-from emp 
-where deptno = (
-	select deptno from dept where loc = 'DALLAS'
-) order by ename asc;
+SELECT ename, deptno FROM emp
+WHERE deptno = (
+	SELECT deptno FROM dept WHERE loc = 'DALLAS'
+) ORDER BY ename ASC;
 
 
 -- 5. 평균 급여(avg(sal))보다 더 많이 받는(>) 사원만 검색
-select ename, avg(sal)
-from emp
-where sal > (
-select avg(sal) from emp
+SELECT ename, sal FROM emp 
+WHERE sal > (
+	SELECT avg(sal) FROM emp
 );
-
 
 
 -- 다중행 서브 쿼리(sub query의 결과값이 하나 이상)
@@ -98,12 +92,9 @@ select ename, empno, sal, deptno from emp
 where sal in (select max(sal) from emp group by deptno);
 	
 
-select ename, empno, sal, deptno from emp
-where (deptno, sal) in (select deptno, max(sal) from emp group by deptno);
-
 -- 8. 직급(job)이 MANAGER인 사람이 속한 부서의 부서 번호와 부서명(dname)과 지역검색(loc)
-select d.deptno, d.dname, d.loc from dept d
-where d.deptno in (select deptno from emp where job = 'MANAGER');
+SELECT * FROM dept 
+WHERE deptno IN (SELECT deptno FROM emp WHERE job = "MANAGER");
 
 
 

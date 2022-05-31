@@ -143,6 +143,8 @@ select * from salgrade s;
 
 -- 9. 사원의 급여가 몇 등급인지 검색
 -- between ~ and : 포함 
+SELECT * FROM salgrade;
+
 select e.sal, s.grade
 from emp e, salgrade s
 where sal between LOSAL and HISAL;

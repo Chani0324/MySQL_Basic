@@ -5,49 +5,58 @@ SHOW DATABASES;
 use gamedata;
 
 drop table if exists characterInfo;
-drop table if exists guildInfo;
+drop table if exists guildInfo; 
 
 
 -- 테이블 생성 및 PK 설정
 CREATE TABLE characterInfo (
-	id 				varchar(20) NOT NULL,
-	guildNum		int,
-	job				varchar(10),
-	lev 			SMALLINT,
-	serverName		varchar(10),
-	charSex			varchar(10),
-	userID			varchar(20),
-	createDate		date,
-	lastDate		date,
-	cashMoney		int,	
-	CONSTRAINT pk_characterInfo PRIMARY KEY (id)	
+	char_id 				varchar(30) NOT NULL,
+	g_num					SMALLINT,
+	job						varchar(10),
+	lev 					smallint,
+	c_power					int,
+	server_name				varchar(3),
+	char_sex				varchar(1),
+	user_id					varchar(30),
+	create_date				date,
+	last_date				date,
+	cash					int,	
+	CHECK (char_id NOT REGEXP '!|@|#|&|<|>'),
+	CHECK (user_id NOT REGEXP '!|@|#|&|<|>'),
+	CHECK (create_date >= '2022-05-30'),
+	CHECK (last_date >= '2022-05-30'),
+	CHECK (cash >= 0),
+	CHECK (lev 1 AND 255),
+	CHECK (c_power > 0),
+	CONSTRAINT pk_characterInfo PRIMARY KEY (char_id)
 );
 
 CREATE TABLE guildInfo (
-	guildNum		int NOT NULL,
-	guildName		varchar(10),
-	guildTend		varchar(6),
-	guildRegion		varchar(10),
-	guildLev		SMALLINT,
-	guildCreateDate	date,
-	CONSTRAINT pk_guildInfo PRIMARY KEY (guildNum)
+	g_num					SMALLINT,
+	g_name					varchar(30),
+	g_trend					varchar(10),
+	g_region				varchar(6),
+	g_lev					SMALLINT,
+	g_create_date			date,
+	CONSTRAINT pk_guildInfo PRIMARY KEY (g_num)
 );
 
 -- FK 설정
-ALTER TABLE characterInfo ADD CONSTRAINT fk_characterInfo_guildInfo FOREIGN KEY (guildNum) REFERENCES guildInfo(guildNum) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE characterInfo ADD CONSTRAINT fk_characterInfo_guildInfo FOREIGN KEY (g_num) REFERENCES guildInfo(g_num) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- 대소문자 구별해서 data 받음
-ALTER TABLE characterInfo CHANGE id id varchar(20) BINARY;
-ALTER TABLE characterInfo CHANGE userId userId varchar(20) BINARY;
+ALTER TABLE characterInfo CHANGE char_id char_id varchar(30) BINARY;
+ALTER TABLE characterInfo CHANGE user_id user_id varchar(30) BINARY;
+
 
 -- guildInfo table에 data 저장
-INSERT INTO guildInfo values(1, 'SKT_T1', '전투', '소환사협곡', 25, STR_TO_DATE('01-07-2012', '%d-%m-%Y'))
+INSERT INTO guildInfo values(1, 'SKT_T1', '전투', '소환사협곡', 25, '2012-02-12');
 
 -- characterInfo table에 data 저장
-INSERT INTO characterInfo values('SKT_T1_Faker', 1, '마법사', 99, 'Kor01', '남', 'GoJeonPa', STR_TO_DATE('01-04-2010', '%d-%m-%Y'), STR_TO_DATE('30-05-2022', '%d-%m-%Y'), 1000000);
-INSERT INTO characterInfo values('SKT_T1_Zeus', 1, '전사', 93, 'Kor01', '남', 'TopLine', STR_TO_DATE('12-07-2015', '%d-%m-%Y'), STR_TO_DATE('30-05-2022', '%d-%m-%Y'), 98768);
+INSERT INTO characterInfo values('SKT_T1_Faker', 1, '마법사', 99, 12342, 'KOR', 'M', 'GoJeonPa', '2011-08-11', '2022-05-30', 2000);
+INSERT INTO characterInfo values('SKT_T1_Zeus', 1, '전사', 93, 2829, 'KOR', 'M', 'TopLine', '2015-07-12', '2022-05-30', 1200);
 
-
+COMMIT;
 
 SELECT * FROM characterInfo;
 SELECT * FROM guildInfo
