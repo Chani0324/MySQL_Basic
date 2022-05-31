@@ -386,6 +386,8 @@ select * from emp06;
 
 -- 19. alter & check
 
+-- char(3) - 무조건 3byte 메모리 점유
+-- varchar(10) - 가변적인 문자열 메모리. 즉 10byte이하의 데이터에서 크기 가변.
 drop table if exists emp06;
 
 create table emp06(
@@ -404,7 +406,8 @@ select * from emp06;
 
 
 -- *** default ***
--- 19. 컬럼에 기본값 설정
+-- 20. 컬럼에 기본값 설정
+-- insert 시에 데이터를 저장하지 않아도 자동으로 기본값으로 초기화(저장)
 drop table if exists emp06;
 
 create table emp06(
@@ -413,15 +416,15 @@ create table emp06(
 	age int default 1
 );
 
-
+DESC emp06;
 select * from information_schema.TABLE_CONSTRAINTS where table_name='emp06';
  
-insert into emp06 values(1, 'master', 'F');
-insert into emp01 values(2, 'master', 'T'); -- error 
+insert into emp06 values(1, 'master', 10);
+insert into emp06 (empno, ename) values(2, 'master'); 
 select * from emp06;
 
 
--- 20. alter & default
+-- 21. alter & default
 
 drop table if exists emp06;
 
@@ -440,9 +443,15 @@ select * from emp06;
 insert into emp06 (empno, ename) values(2, 'use02');
 select * from emp06;
 
--- 21. default drop 
+
+-- 22. default drop
+-- defualt 제약조건 삭제
+-- age 컬럼은 존재만 하는 상황.
 alter table emp06 alter age drop default;
+
 select * from information_schema.TABLE_CONSTRAINTS where table_name='emp06';
+
+-- default로 적용되었다가 default값 drop한 column은 값 미 반영시 err(not null 가능이지만 err 발생.)
 insert into emp06 (empno, ename) values(3, 'use03'); 
 select * from emp06;
 
