@@ -82,7 +82,7 @@ INSERT INTO guildInfo (g_name, g_trend, g_region, g_lev, g_create_date)
 -- char_id, user_id, g_num, job, lev, c_power, server_name, char_sex, create_date, last_date, cash
 INSERT INTO characterInfo VALUES ('No1나만도시락', 'No1나만도시락', 1000, 'Magician', 101, 15762, 'KOR', 'F', '2020-05-31', '2022-04-23', 192800);
 INSERT INTO characterInfo VALUES ('No2나만도시락', 'No1나만도시락', 1000, 'Assassin', 97, 12831, 'KOR', 'M', '2021-08-22', '2022-04-29', 123900);
-INSERT INTO characterInfo VALUES ('세바스짱', '세바스짱', 1000, 'Archer', 105, 16642, 'KOR', 'F', '2020-09-17', '2022-05-30', 1800);
+INSERT INTO characterInfo VALUES ('세바스짱', '세바스짱', null, 'Archer', 105, 16642, 'KOR', 'F', '2020-09-17', '2022-05-30', 1800);
 INSERT INTO characterInfo VALUES ('뭐하세요', '트롤인데요', 1003, 'Warrior', 66, 354, 'USA', 'M', '2021-08-22', '2022-04-14', 1000000);
 INSERT INTO characterInfo VALUES ('트롤인데요', '트롤인데요', 1003, 'Archer', 112, 17371, 'USA', 'F', '2020-10-30', '2022-05-06', 827100);
 INSERT INTO characterInfo VALUES ('성기사있으면던짐', '성기사있으면던짐', 1009, 'Priest', 99, 14872, 'JPN', 'M', '2021-01-01', '2022-02-11', 16200);
