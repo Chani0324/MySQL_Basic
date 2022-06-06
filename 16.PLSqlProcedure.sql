@@ -26,6 +26,8 @@
 
 3. 에러 발생시
 show error
+
+프로시저는 CALL 로 호출 해야하고, 함수는 SELECT로 호출해야 한다.
 */
 
 
@@ -136,24 +138,7 @@ END;
 
 
 -- 이미 db에 선언된 변수에 값을 할당하는 문법 ':' 동적 변수값 대입. 바인딩이라고도 함.
-CALL info_empinfo('SMITH', :vempno, :vsal);
+CALL info_empinfo('SMITH', :v_empno, :v_sal);	-- dbeaber에서 ':' 표시는 runtime input을 받는다는 의미라서 output으로 못받음
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+CALL info_empinfo('SMITH', ?, ?);	-- 결과값이 나옴.
 

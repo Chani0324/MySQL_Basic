@@ -37,7 +37,7 @@
 show databases;
 
 -- 사용자 정의로 database 생성
-CREATE DATABASE playdata;
+-- CREATE DATABASE playdata;
 
 -- database에 접속.(필수)
 USE playdata;
@@ -49,7 +49,7 @@ drop table IF EXISTs dept;
 -- dept table 생성
 -- 한부서 표현 속성 : 부서번호(중복불허) / 부서명 / 지역
 CREATE TABLE dept (
-    deptno               int  NOT NULL ,
+    deptno               int  NOT NULL,
     dname                varchar(20),
     loc                  varchar(20),
     CONSTRAINT pk_dept PRIMARY KEY ( deptno )
@@ -59,7 +59,7 @@ CREATE TABLE emp (
     empno                int  NOT NULL  AUTO_INCREMENT,
     ename                varchar(20),
     job                  varchar(20),
-    mgr                  smallint ,
+    mgr                  smallint,
     hiredate             date,
     sal                  numeric(7, 2)    ,
     comm                 numeric(7, 2)    ,
@@ -121,3 +121,5 @@ INSERT INTO SALGRADE VALUES (5,3001,9999);
 -- insert / update / delete 명령에만 적용
 -- 참고 : commit 영구 저장은 tool별로 기본 속성으로 처리 하기도 하나 코드로 commit 작업 권장
 commit;
+
+SELECT * FROM emp;
